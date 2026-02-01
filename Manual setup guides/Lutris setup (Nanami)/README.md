@@ -12,7 +12,7 @@ If you notice any mistakes or outdated info in this Guide, or have any questions
 
 - **Lutris** - If you don't know where to get Lutris refer to their own [install guide](https://lutris.net/downloads)
 
-- **wine-ge-8-26-x86_64** - This is the version i run and confirmed it working with, other wine/proton versions might work but uncomfirmed
+- **wine-ge-8-26-x86_64** - This is the version i run and confirmed it working with, other wine/proton versions might work but unconfirmed
 
 - **The most recent LiveSplit version** - [Download the newest release](https://github.com/LiveSplit/LiveSplit/releases)
 
