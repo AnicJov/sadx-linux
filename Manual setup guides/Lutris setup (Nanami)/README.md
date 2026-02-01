@@ -39,7 +39,7 @@ If you notice any mistakes or outdated info in this Guide, or have any questions
 > Don't change anything in `System options`
 
 5. Start the game/ModManager through Lutris once (select the game and click `Play` on the bottom-left)
-> If it asks you to install any redist like .NET etc click `No` - It will just exit.
+> If it asks you to install any redist like .NET etc. click `No` - It will just exit.
 
 6. Copy your `SONICADVENTUREDX` game folder into `/home/USER/Games/sadx/prefix/drive_c/Program Files/`
 
@@ -93,7 +93,7 @@ If you notice any mistakes or outdated info in this Guide, or have any questions
 
 2. Extract your [most recent release](https://github.com/LiveSplit/LiveSplit/releases) of LiveSplit into that folder
 
-3. In Lutris open the same menu that you opened both Winetricks and Wine configuration earlier and click on `Run EXE inside Wine prefix`
+3. In Lutris open the same menu that you opened both Winetricks and Wine configuration with earlier and click on `Run EXE inside Wine prefix`
 
 4. Navigate to `/home/USER/Games/sadx/prefix/drive_c/Program Files/SONICADVENTUREDX/TOOLS/LiveSplit/` and open `LiveSplit.exe`
 
@@ -101,4 +101,4 @@ If you notice any mistakes or outdated info in this Guide, or have any questions
 > To open LiveSplit in the future repeat steps 3. & 4.
 
 ## Conclusion
-This should be all the setup you need! If you need any additional help dont hesitate to contact me through the methods mentioned at the top! Happy running!😁
+This should be all the setup you need! If you need any additional help don't hesitate to contact me through the methods mentioned at the top! Happy running!😁
