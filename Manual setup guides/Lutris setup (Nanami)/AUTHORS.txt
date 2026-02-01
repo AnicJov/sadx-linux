@@ -1,0 +1,10 @@
+Primary maintainer
+Name: Nanami
+GitHub: @NanamiTV
+Role: Guide Author
+Preferred contact:Discord @nanami.tv; Discord server "Sonic Adventure (DX) Speedrunning - #troubleshooting" @Nanami
+Responsibilities:
+ - Maintain "Lutris Setup (Nanami)"
+Backup maintainers: Anic;GitHub: @AnicJov
+Last updated: 2026-02-01
+Notes:
