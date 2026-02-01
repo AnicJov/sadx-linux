@@ -1,0 +1,64 @@
+description: This installer is for the CD version released in 2004. Sets up a wine prefix for running the coupon version of the game.
+game_slug: sonic-adventure-dx
+gogslug: sonic-adventure-dx
+humblestoreid: sonic-adventure-dx
+installer_slug: sonic-adventure-dx
+name: Sonic Adventure DX
+runner: wine
+overrides:
+  version: wine-ge-8-26
+script:
+  files:
+  - coupon: https://download1078.mediafire.com/qn07wkk4xovgROMmqJWXUA940okx6P65UyHP78qzc62VbC7zwZ84nK5xKdDPdA5buZ2MTS8UQHvLFehhRx5B0ef4EpUpGgGU-YO8CN64Jmd_PD8pi8TAEbsUK2WyOaQvx3ds2XlDsm9I7_bI3msL0cftYqgtkZ1OAZdq2N1StecU/pdlkof86x11pxr7/SADXPC+Linux+Coupon+v1.zip
+  - livesplit: https://github.com/LiveSplit/LiveSplit/releases/download/1.8.35/LiveSplit_1.8.35.zip
+  game:
+    arch: win32
+    exe: drive_c/SONICADVENTUREDX/SAModManager.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      description: Creating wine prefix
+      arch: win32
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      description: Installing d3dx9
+      app: d3dx9
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      description: Installing quartz
+      app: quartz
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      description: Installing dotnet7
+      app: dotnet7
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      description: Installing dotnetdesktop7
+      app: dotnetdesktop7
+      name: winetricks
+      prefix: $GAMEDIR
+  - extract:
+      description: Extracting SADX coupon
+      dst: $GAMEDIR/drive_c/SONICADVENTUREDX/
+      file: coupon
+  - extract:
+       description: Extracting LiveSplit
+       dst: $GAMEDIR/drive_c/SONICADVENTUREDX/TOOLS/LiveSplit/ 
+       file: livesplit
+  - task:
+      description: Setting d3d8 to native
+      arch: win32
+      key: d3d8
+      name: set_regedit
+      path: HKEY_CURRENT_USER\Software\Wine\DllOverrides
+      prefix: $GAMEDIR
+      type: REG_SZ
+      value: native
+slug: sonic-adventure-dx
+steamid: 71250
+version: CD-ROM Coupon v7
+year: 2004
