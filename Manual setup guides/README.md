@@ -1,0 +1,3 @@
+# Manual Setup Guides
+
+*todo*
