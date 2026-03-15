@@ -49,7 +49,7 @@ sudo zypper install -y steam cabextract unzip wget perl fontconfig glibc-32bit l
 ### Running from source
 ```sh
 git clone https://github.com/AnicJov/sadx-linux.git
-cd sadx-linux
+cd "sadx-linux/Auto setup scripts/sadx-installer-python"
 
 python -m venv venv
 source venv/bin/activate
@@ -62,7 +62,7 @@ python src/main.py
 ### Building binary
 ```sh
 git clone https://github.com/AnicJov/sadx-linux.git
-cd sadx-linux
+cd "sadx-linux/Auto setup scripts/sadx-installer-python"
 
 python -m venv venv
 source venv/bin/activate
