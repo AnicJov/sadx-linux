@@ -15,7 +15,6 @@ develop-eggs/
 dist/
 eggs/
 parts/
-bin/
 var/
 sdist/
 wheels/

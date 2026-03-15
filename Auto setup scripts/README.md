@@ -1,3 +1,3 @@
 # Automatic Setup Scripts
 
-*todo*
+Refer to each script's README.md for instructions.
