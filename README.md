@@ -2,7 +2,7 @@
 
 This repository is a collection of guides and scripts to set up SADX and LiveSplit on Linux for speedrunning.
 
-If you want an automatic installation go to the [releases to download](https://github.com/sadx-linux/sadx-linux/releases/latest) the installer, or check out the `Auto setup scripts` directory, specifically the `sadx-installer-python` directory and its readme.
+If you want an automatic installation go to the [releases to download](https://github.com/AnicJov/sadx-linux/releases/latest) the installer, or check out the `Auto setup scripts` directory, specifically the `sadx-installer-python` directory and its readme.
 
 If you would rather install manually, choose a guide to follow from the `Manual setup guides` directory. Nanami's guide is a good place to start.
 
