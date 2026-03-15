@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Thin wrapper to sanitize environment and get some logging done
+
+LOG="$HOME/.local/share/sadx-installer/logs/cabextract.log"
+mkdir -p "$(dirname "$LOG")"
+touch "$LOG"
+
+{
+    echo "==== $(date) ===="
+    echo "argv: $0 $*"
+    echo "CABEXTRACT=$CABEXTRACT"
+    echo "PWD=$(pwd)"
+} >> "$LOG"
+
+# Restore host library path for external native tools
+if [ -n "$LD_LIBRARY_PATH_ORIG" ]; then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_ORIG"
+else
+    unset LD_LIBRARY_PATH
+fi
+
+unset APPDIR
+unset APPIMAGE
+unset ARGV0
+unset PYTHONHOME
+unset PYTHONPATH
+
+echo "executing: ${CABEXTRACT} -f '$@'" >> "$LOG"
+"${CABEXTRACT}" -f "$@"
+RC=$?
+echo "finished: ${CABEXTRACT} $RC" >> "$LOG"
+exit "$RC"

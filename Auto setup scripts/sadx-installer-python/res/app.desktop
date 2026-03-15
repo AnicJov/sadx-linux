@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name={name}
+Name[en_GB]={name}
+Name[en_NZ]={name}
+Name[uk]={name}
+GenericName={generic_name}
+Comment={comment}
+Comment[en_GB]={comment}
+Comment[en_NZ]={comment}
+Comment[uk]={comment}
+Keywords={keywords};wine;proton;game;gaming;
+Exec={exec}
+Path={path}
+Terminal=false
+Type=Application
+Icon={icon}
+MimeType={mime}
+Categories=Game;
+StartupNotify=true

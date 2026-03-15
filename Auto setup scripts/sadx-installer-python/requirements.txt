@@ -1,0 +1,6 @@
+pyinstaller
+requests
+pyzipper
+PyQt6
+PyQtWaitingSpinner
+humanize

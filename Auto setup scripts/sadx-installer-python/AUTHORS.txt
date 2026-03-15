@@ -1,0 +1,11 @@
+Primary maintainer
+Name: Anic
+GitHub: @AnicJov
+Role: Repo maintainer
+Preferred contact: GitHub issues (mention @AnicJov); Discord @_anic; Discord server "Sonic Adventure (DX) Speedrunning - #troubleshooting" @_anic
+Responsibilities:
+ - Review all PRs and Issues in this repo
+ - Approve PRs from contributors
+Backup maintainers:
+Last updated: 2026-02-01
+Notes:
