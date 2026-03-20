@@ -41,11 +41,11 @@ class LicenseDialog(QDialog):
         label = QLabel(
             '<b>By using this installer you acknowledge and understand the following:</b>\n'
             '<ul>'
-            '<li>The installer downloads and extracts ProtonGE, winetricks, the SADX coupon, and LiveSplit</li>'
-            '<li>You will need <b>~3GiB</b> of free disk space to complete the install</li>'
-            '<li>This software is distributed as-is with <b>no warrinty</b>. The author(s) are <b>not</b>'
-            'liable for anything you do with this installer; any damages, including but not limited to, data loss</li>'
-            '<li>This software is distributed under the GNU General Public License version 3:</li>'
+            '<li>The installer downloads and extracts ProtonGE, winetricks, the SADX coupon, and LiveSplit</li> '
+            '<li>You will need <b>~3GiB</b> of free disk space to complete the install</li> '
+            '<li>This software is distributed as-is with <b>no warranty</b>. The author(s) are <b>not</b> '
+            'liable for anything you do with this installer; any damages, including but not limited to, data loss</li> '
+            '<li>This software is distributed under the GNU General Public License version 3:</li> '
             '</ul>'
         )
         label.setWordWrap(True)
