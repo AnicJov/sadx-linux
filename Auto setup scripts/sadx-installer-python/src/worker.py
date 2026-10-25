@@ -151,6 +151,9 @@ class InstallerWorker(QThread):
             env['STEAM_COMPAT_DATA_PATH'] = str(self.install_path / COMPAT_PATH)
             env['STEAM_COMPAT_CLIENT_INSTALL_PATH'] = str(self.install_path / COMPAT_PATH)
             env['PROTONFIXES_DISABLE'] = "1"
+            # .NET installers must replace DLLs inside the prefix, not follow
+            # links into Proton's shared files. Match ProtonFixes' dotnet setup.
+            env['PROTON_DLL_COPY'] = "*"
 
         self.env = env
 
