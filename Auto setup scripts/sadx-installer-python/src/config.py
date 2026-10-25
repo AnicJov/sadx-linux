@@ -41,8 +41,7 @@ COUPON_UNSTABLE_URL: str = (
     "MlpqOGVpTVJfQWp4TjBZcU1PWEF0V1VjQlBoUyZleHBvcnQ9ZG93bmxvYWQmYXV0aHVzZXI9"
     "MCZjb25maXJtPXQmdXVpZD02ODM1MTExYy0zOWY5LTQxOTktYTRmYi1mNThlMWU1MGZkYjc="
 )
-PROTON_LATEST_QURL:    str = "https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/"
-PROTON_LATEST_URL:    str = r"https://github.com/GloriousEggroll/proton-ge-custom/releases/download/{version}/{version}.tar.gz"
+PROTON_LATEST_API_URL: str = "https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest"
 PROTON_STABLE_URL:    str = f"https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton{PROTON_STABLE_VERSION}/GE-Proton{PROTON_STABLE_VERSION}.tar.gz"
 LIVESPLIT_LATEST_QURL: str = "https://github.com/LiveSplit/LiveSplit/releases/latest/"
 LIVESPLIT_LATEST_URL: str = r"https://github.com/LiveSplit/LiveSplit/releases/download/{version}/LiveSplit_{version}.zip"

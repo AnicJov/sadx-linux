@@ -22,7 +22,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QApplication
 
 from gui.main_window import MainWindow
-from src.util.fileio import resource_path
+from util.fileio import resource_path
 from util.qlogger import get_qlogger
 
 

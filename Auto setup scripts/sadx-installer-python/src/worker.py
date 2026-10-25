@@ -40,7 +40,7 @@ from util.fileio import (
     safe_copy_files,
     safe_makedirs,
 )
-from util.network import fetch_resource_if_missing, get_latest_url
+from util.network import fetch_resource_if_missing, get_latest_proton_url, get_latest_url
 from util.qlogger import QLogger
 from util.shell import open_shell_cmd, run_shell_cmd
 
@@ -160,7 +160,7 @@ class InstallerWorker(QThread):
             else get_latest_url(LIVESPLIT_LATEST_QURL, LIVESPLIT_LATEST_URL)
         self.proton_url = PROTON_STABLE_URL \
             if version in ["stable", "legacy"] \
-            else get_latest_url(PROTON_LATEST_QURL, PROTON_LATEST_URL)
+            else get_latest_proton_url(PROTON_LATEST_API_URL)
 
         self.livesplit_checksum = LIVESPLIT_STABLE_CHECKSUM if version in ["stable", "legacy"] else ""
         self.proton_checksum = PROTON_STABLE_CHECKSUM if version in ["stable", "legacy"] else ""

@@ -14,6 +14,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import platform
 import requests
 import time
 from humanize import naturalsize
@@ -115,3 +116,29 @@ def get_latest_url(url: str, url_pattern: str) -> str:
     full_url = url_pattern.replace(r"{version}", version)
 
     return full_url
+
+def get_latest_proton_url(api_url: str) -> str:
+    """Select the latest Proton-GE release archive for the host architecture."""
+    machine = platform.machine().lower()
+    arch = {"amd64": "x86_64", "arm64": "aarch64"}.get(machine, machine)
+    if arch not in ("x86_64", "aarch64"):
+        raise RuntimeError(f"Unsupported architecture for Proton-GE: {machine}")
+
+    with get(api_url, timeout=30) as response:
+        release = response.json()
+
+    version = release["tag_name"]
+    names = [f"{version}-{arch}.tar.gz"]
+    # Before architecture suffixes, Proton-GE archives were x86_64 only.
+    if arch == "x86_64":
+        names.append(f"{version}.tar.gz")
+
+    assets = {asset["name"]: asset["browser_download_url"] for asset in release["assets"]}
+    for name in names:
+        if name in assets:
+            return assets[name]
+
+    raise RuntimeError(
+        f"Proton-GE release {version} has no archive for {arch} "
+        f"(expected {' or '.join(names)})"
+    )
