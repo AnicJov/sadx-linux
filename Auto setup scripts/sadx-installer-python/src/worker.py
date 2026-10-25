@@ -17,6 +17,7 @@ Copyright (C) 2026  AnicJov
 
 import base64
 import os
+import platform
 import time
 import traceback
 import zipfile
@@ -141,7 +142,10 @@ class InstallerWorker(QThread):
 
         env['WINEPREFIX'] = str(self.install_path / PREFIX_PATH)
         env['WINEDEBUG'] = "fixme-all"
-        env['WINE'] = str(self.wine64)
+        env['WINE'] = str(self.wine)
+        env['WINE64'] = str(self.wine64)
+        env['WINESERVER'] = str(self.wineserver)
+        env['PATH'] = f"{self.wine.parent}{os.pathsep}{env.get('PATH', os.defpath)}"
 
         if self.proton:
             env['STEAM_COMPAT_DATA_PATH'] = str(self.install_path / COMPAT_PATH)
@@ -190,15 +194,23 @@ class InstallerWorker(QThread):
         self.proton = self.proton_dir / "proton"
         if not self.proton.exists():
             raise FileNotFoundError("Proton script doesn't exist")
-        self.wine = self.proton_dir / "files" / "bin" / "wine"
-        if not self.wine.exists():
-            self.logger.warning("Falling back to system wine")
-            self.wine = "wine"
-        self.wine64 = self.proton_dir / "files" / "bin" / "wine64"
-        if not self.wine64.exists():
-            self.logger.warning("Falling back to system wine64")
-            self.wine = "wine"
-            self.wine64 = "wine"
+        bin_dir = self.proton_dir / "files" / "bin"
+        arm_bin_dir = self.proton_dir / "files" / "bin-arm64"
+        if (platform.machine() == "aarch64"
+                and os.environ.get("PROTON_USE_ARM64", "1") == "1"
+                and arm_bin_dir.is_dir()):
+            bin_dir = arm_bin_dir
+
+        self.wine = bin_dir / "wine"
+        self.wineserver = bin_dir / "wineserver"
+        for binary in (self.wine, self.wineserver):
+            if not binary.is_file():
+                raise FileNotFoundError(f"Proton binary doesn't exist: {binary}")
+
+        self.wine64 = bin_dir / "wine64"
+        if not self.wine64.is_file():
+            # New WoW64 builds use one Wine loader for both architectures.
+            self.wine64 = self.wine
         self.winetricks = self.proton_dir / "protonfixes" / "files" / "bin" / "winetricks"
         if not self.winetricks.exists():
             self.logger.warning("Falling back to system winetricks")
@@ -346,39 +358,10 @@ class InstallerWorker(QThread):
             self.check_canceled()
             self.logger.info(f"Installing winetricks verb: {verb}")
 
-            p = run_shell_cmd([str(self.winetricks), "-q", "--optout", verb], self.env,
-                              ignore_err=True, err_msg="Winetricks returned code", log_cb=self.logger.log_cb)
-
-            # Winetricks likes to return non-zero on warning messages,
-            # so detect non-fatal ones and continue (very crude detection, sometimes false-positive)
-            if p.returncode != 0:
-                output = (p.stdout or '') + '\n' + (p.stderr or '')
-                output = output.lower()
-                self.logger.info(f"output: {output}")
-
-                # Treat these patterns as non-fatal warnings (log and continue)
-                nonfatal_patterns = [
-                    "warning:",
-                    "warning: ",
-                    "warning: bug:",
-                    "you are using a 64-bit wineprefix",
-                    "note: command",
-                ]
-
-                is_nonfatal = any(pattern in output for pattern in nonfatal_patterns)
-
-                if is_nonfatal:
-                    self.logger.warning(f"Non-fatal winetricks warning for {verb}; continuing. (returncode={p.returncode})")
-                    self.run_step_progress(index, (i + 1) / num_verbs)
-                    continue
-
-                # Otherwise treat as fatal
-                self.logger.error(p.stderr or p.stdout or f'Winetricks returned code {p.returncode}')
-
-                # Prompt user to restart install if we don't catch the warning...
-                # why is winetricks like this
-                raise RuntimeError(f"Winetricks failed for {verb}: { (p.stderr or p.stdout)[:200] }"
-                                   "\n\nIf winetricks reported a `warning` instead of an `error` please try installing again.")
+            # Winetricks also prints fatal failures as "warning:" (w_die).
+            # The exit status, not the wording, determines whether it succeeded.
+            run_shell_cmd([str(self.winetricks), "-q", "--optout", verb], self.env,
+                          err_msg=f"Winetricks failed for {verb}:", log_cb=self.logger.log_cb)
 
             self.run_step_progress(index, (i + 1) / num_verbs)
 

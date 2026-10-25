@@ -29,7 +29,8 @@ def run_shell_cmd(cmd: list[str], env, capture_output=True, text=True, err_msg: 
     if p.stdout:
         log_cb(LogLevel.INFO, p.stdout)
     if p.stderr:
-        log_cb(LogLevel.ERROR, p.stderr) if not ignore_err else log_cb(LogLevel.WARNING, p.stderr)
+        level = LogLevel.ERROR if p.returncode != 0 and not ignore_err else LogLevel.WARNING
+        log_cb(level, p.stderr)
     if not ignore_err and p.returncode != 0:
         raise RuntimeError(f"{err_msg} {p.returncode} {p.stderr}")
 
